@@ -1,0 +1,45 @@
+# Virtual Environment
+env/
+venv/
+
+# Environment Variables
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# SQLAlchemy / SQLite
+*.db
+*.sqlite3
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+
+# Coverage Reports
+.coverage
+htmlcov/
+
+# Alembic Cache
+alembic/versions/__pycache__/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
