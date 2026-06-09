@@ -6,6 +6,11 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.schemas.auth import RegisterRequest,LoginRequest
 from app.services.auth_service import register_user,login_user
+from app.core.dependencies import (
+    get_current_user
+)
+
+from app.models.user import User
 
 
 router = APIRouter(
@@ -32,3 +37,11 @@ def login(
     return login_user(
         db,request
     )
+
+@router.get("/profile")
+def profile(
+    current_user: User = Depends(
+        get_current_user
+    )
+):
+    return current_user
