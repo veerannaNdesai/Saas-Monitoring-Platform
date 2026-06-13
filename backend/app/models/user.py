@@ -15,5 +15,5 @@ class User(Base):
     
     monitors = relationship(
         'Monitor' , 
-        back_populates = 'users'
+        back_populates = 'user'
     )

@@ -1,7 +1,9 @@
 
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI
 from app.core.config import settings 
 from app.api.auth import router as auth_router
+from app.api.monitor import router as monitor_router
 
 
 
@@ -11,6 +13,7 @@ app = FastAPI(
     
 )
 app.include_router(auth_router)
+app.include_router(monitor_router)
 
 @app.get('/')
 def root():
