@@ -52,9 +52,9 @@ def get_monitors(
     )
 
 def get_monitor_by_id(
+    monitor_id : int,
     current_user:User,
-    db : Session,
-    monitor_id : int
+    db : Session 
 ):
     return (
         db.query(Monitor)

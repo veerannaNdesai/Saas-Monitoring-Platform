@@ -44,6 +44,8 @@ class Monitor(Base):
         nullable=True
     )
 
+    response_time : Mapped[int | None] 
+
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id")
     )

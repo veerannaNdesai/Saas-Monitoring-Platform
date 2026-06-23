@@ -4,6 +4,8 @@
 from app.services.monitor_service import update_monitor
 from app.services.monitor_service import get_monitor_by_id,delete_monitor_by_id
 # pyrefly: ignore [missing-import]
+from app.services.health_service import check_health
+# pyrefly: ignore [missing-import]
 from fastapi import (
     APIRouter,
     Depends,
@@ -28,6 +30,7 @@ from app.schemas.monitor import (
 from app.services.monitor_service import (
     create_monitor,get_monitors
 )
+
 
 
 router = APIRouter(
@@ -81,7 +84,7 @@ def get_monitor_by_id_endpoint(
     id : int,
     current_user:User = Depends(get_current_user),
     db : Session = Depends(get_db)):
-    monitor = get_monitor_by_id(current_user, db, id)
+    monitor = get_monitor_by_id(id, current_user, db)
     if not monitor:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -137,3 +140,21 @@ def get_monitors_related_to_users(
     user: User = Depends(get_current_user)
 ):
     return user
+
+@router.post('/{id}/check',response_model=MonitorResponse)
+def health_check_endpoint(
+    id : int,
+    current_user : User = Depends(get_current_user),
+    db : Session = Depends(get_db)
+):
+    monitor = check_health(
+        id,
+        current_user,
+        db
+    )
+    if not monitor:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Monitor not found"
+        )
+    return monitor
