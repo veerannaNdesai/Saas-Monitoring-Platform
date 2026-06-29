@@ -1,4 +1,6 @@
 
+
+from typing import List
 from datetime import datetime
 from app.db.database import Base
 from sqlalchemy.orm import Mapped , mapped_column ,relationship
@@ -53,4 +55,8 @@ class Monitor(Base):
     user = relationship(
         "User",
         back_populates="monitors"
+    )
+
+    monitor_logs : Mapped[List['MonitorLog']] = relationship(
+        back_populates = 'monitor'
     )

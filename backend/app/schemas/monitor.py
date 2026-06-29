@@ -22,3 +22,13 @@ class MonitorResponse(MonitorInfo):
 class MonitorEditRequest(BaseModel):
     name : str | None = None
     url : HttpUrl | None = None
+
+class MonitorLogResponse(BaseModel):
+    id : int
+    monitor_id : int
+    status : str
+    response_time : int | None
+    
+class CheckMonitorLogResponse(BaseModel):
+    monitor : MonitorResponse 
+    monitor_log : MonitorLogResponse | None

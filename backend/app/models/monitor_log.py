@@ -1,21 +1,20 @@
-from app.models.monitor import Monitor
+
 from app.db.database import Base
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Mapped , mapped_column ,relationship
 from sqlalchemy import ForeignKey
 
 class MonitorLog(Base):
-    __tablename__ = "monitor_log"
+    __tablename__ = "monitor_logs"
 
-    id = Mapped[int] = mapped_column(primary_key=True)
+    id : Mapped[int] = mapped_column(primary_key=True)
 
-    monitor_id = Mapped[int] = mapped_column(ForeignKey('monitor.id'))
+    monitor_id : Mapped[int] = mapped_column(ForeignKey('monitors.id'))
 
-    status = Mapped[str] = mapped_column(default='PENDING')
+    status : Mapped[str] = mapped_column(default='PENDING')
 
-    response_time = Mapped[int] | None
+    response_time : Mapped[int | None] = mapped_column(nullable=True)
 
-    monitor = relationship(
-        Monitor,
-        back_populates='monitor_log'
+    monitor : Mapped['Monitor'] = relationship(
+        back_populates = 'monitor_logs'
     )

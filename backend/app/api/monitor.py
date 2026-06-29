@@ -19,12 +19,14 @@ from app.core.dependencies import get_current_user
 
 
 from app.models.user import User
+from app.models.monitor_log import MonitorLog
 from app.schemas.auth import UserResponse
 
 from app.schemas.monitor import (
     CreateMonitorRequest,
     MonitorResponse,
-    MonitorEditRequest
+    MonitorEditRequest,
+    CheckMonitorLogResponse
 )
 
 from app.services.monitor_service import (
@@ -141,7 +143,7 @@ def get_monitors_related_to_users(
 ):
     return user
 
-@router.post('/{id}/check',response_model=MonitorResponse)
+@router.post('/{id}/check',response_model=CheckMonitorLogResponse)
 def health_check_endpoint(
     id : int,
     current_user : User = Depends(get_current_user),
