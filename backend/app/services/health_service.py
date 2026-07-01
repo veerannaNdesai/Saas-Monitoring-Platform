@@ -45,7 +45,8 @@ def check_monitor(
     monitor_log = MonitorLog(
             monitor_id = monitor.id,
             status = monitor.status,
-            response_time = monitor.response_time
+            response_time = monitor.response_time,
+            checked_at = datetime.utcnow()
         )
         
     db.add(monitor_log)

@@ -24,10 +24,9 @@ class MonitorEditRequest(BaseModel):
     url : HttpUrl | None = None
 
 class MonitorLogResponse(BaseModel):
-    id : int
-    monitor_id : int
     status : str
     response_time : int | None
+    checked_at : datetime | None
     
 class CheckMonitorLogResponse(BaseModel):
     monitor : MonitorResponse 
